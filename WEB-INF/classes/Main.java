@@ -36,15 +36,10 @@ public class Main extends HttpServlet {
 
 
 
-
-
-
          out.println("<h2>game store baby</h2>");
 
 
          ResultSet rset = stmt.executeQuery(sqlStr);  // Send the query to the server
-
-
 
 
 		out.println("<form method='post' action='query'>");

@@ -1,4 +1,3 @@
-// To save as "<TOMCAT_HOME>\webapps\hello\WEB-INF\classes\QueryServlet.java".
 import java.io.*;
 import java.sql.*;
 import javax.servlet.*;
@@ -26,7 +25,7 @@ public class EshopOrderServlet extends HttpServlet {
       try (
          // Step 1: Allocate a database 'Connection' object
          Connection conn = DriverManager.getConnection(
-               "jdbc:mysql://localhost:3306/ebookshop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
+               "jdbc:mysql://localhost:3306/eshop?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
                "myuser", "xxxx");   // For MySQL
                // The format is: "jdbc:mysql://hostname:port/databaseName", "username", "password"
 
@@ -43,23 +42,26 @@ public class EshopOrderServlet extends HttpServlet {
             // Process each of the books
             for (int i = 0; i < ids.length; ++i) {
                // Update the qty of the table books
-               sqlStr = "UPDATE books SET qty = qty - 1 WHERE id = " + ids[i];
+               sqlStr = "UPDATE games SET qty = qty - 1 WHERE id = " + ids[i];
                //out.println("<p>" + sqlStr + "</p>");  // for debugging
                count = stmt.executeUpdate(sqlStr);
                //out.println("<p>" + count + " record updated.</p>");
  
                // Create a transaction record
-               sqlStr = "INSERT INTO order_records (id, qty_ordered) VALUES ("
+               sqlStr = "INSERT INTO orders (gameid, qtyordered) VALUES ("
                      + ids[i] + ", 1)";
                //out.println("<p>" + sqlStr + "</p>");  // for debugging
                count = stmt.executeUpdate(sqlStr);
                //out.println("<p>" + count + " record inserted.</p>");
-               out.println("<h3>Your order for book id=" + ids[i]
+               sqlStr = "SELECT title FROM games WHERE id = " + ids[i];
+               ResultSet rset = stmt.executeQuery(sqlStr);
+               rset.next();
+               out.println("<h3>Your order for " + rset.getString("title")
                      + " has been confirmed.</h3>");
             }
             out.println("<h3>Thank you.<h3>");
          } else { // No book selected
-            out.println("<h3>Please go back and select a book...</h3>");
+            out.println("<h3>Please go back and select a gane >:(</h3>");
          }
       } catch(Exception ex) {
          out.println("<p>Error: " + ex.getMessage() + "</p>");
