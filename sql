@@ -23,6 +23,8 @@ PRIMARY KEY (id)
 );
 
 insert into accounts values (1, 'admin', 'ballsdeep69', 99126929, 'UpYourAssTurnRight Ave');
+insert into accounts values (2, 'aa', 'aa', 89989898, 'hehe land');
+insert into accounts values (3, 'username', 'password', 97351895, 'Another Road');
 
 DROP TABLE IF EXISTS games;
 CREATE TABLE games (
