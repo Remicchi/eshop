@@ -9,6 +9,21 @@ id gameid customerid quantity
 customers
 id name email
 
+accounts
+id username password hpnumber address
+
+DROP TABLE IF EXISTS accounts;
+CREATE TABLE (
+id int NOT NULL AUTO_INCREMENT,
+username varchar(50),
+password varchar(50),
+hpnumber int,
+address varchar(50)
+PRIMARY KEY (id)
+);
+
+insert into games values (1, 'admin', 'ballsdeep69', 99126929, 'UpYourAssTurnRight Ave');
+
 DROP TABLE IF EXISTS games;
 CREATE TABLE games (
 id int NOT NULL AUTO_INCREMENT,
