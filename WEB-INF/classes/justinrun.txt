@@ -1,3 +1,4 @@
 javac -cp .;C:/Users/Justin/Desktop/"IM2073 Web"/apache-tomcat-9.0.43/lib/servlet-api.jar QueryServlet.java
 javac -cp .;C:/Users/Justin/Desktop/"IM2073 Web"/apache-tomcat-9.0.43/lib/servlet-api.jar Main.java
 javac -cp .;C:/Users/Justin/Desktop/"IM2073 Web"/apache-tomcat-9.0.43/lib/servlet-api.jar EshopOrderServlet.java
+javac -cp .;C:/Users/Justin/Desktop/"IM2073 Web"/apache-tomcat-9.0.43/lib/servlet-api.jar LogIn.java
