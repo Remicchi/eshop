@@ -18,7 +18,7 @@ id int NOT NULL AUTO_INCREMENT,
 username varchar(50),
 password varchar(50),
 hpnumber int,
-address varchar(50)
+address varchar(50),
 PRIMARY KEY (id)
 );
 
