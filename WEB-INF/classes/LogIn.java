@@ -20,7 +20,7 @@ public class LogIn extends HttpServlet {
       // Print an HTML page as the output of the query
       out.println("<!DOCTYPE html>");
       out.println("<html>");
-      out.println("<head><title>Query Response</title></head>");
+      out.println("<head><title>Query Response</title><link rel='stylesheet' href='styles.css' /></head>");
       out.println("<body>");
 
       try (
@@ -46,9 +46,20 @@ public class LogIn extends HttpServlet {
          out.println(request.getParameter("password"));
          // Step 4: Process the query result set
          if (rset.getString("password") == request.getParameter("password")){
-            out.println("Log In")
+            out.println("<form method='post' action='main' name='main'></form>");
          }else{
-            out.println("Wrong UserName or Password");
+            out.println("<h1> Error! >:( </h1>");
+            out.println("<h2>Yet Another Bookshop</h2>");
+              out.println("<form method='post' action='login'>");
+              out.println(" <b>Enter Username:</b>");
+              out.println(" <input type='text' name='username' />");
+              out.println(" <br /><br />");
+              out.println(" <b>Enter Password:<b>");
+              out.println(" <input type='password' name='password' />");
+               out.println("<br /><br />   ");
+               out.println("<input type='submit' value='Log In'>");
+              out.println(" <input type='reset' value='Clear'>");
+              out.println("</form>");
          }
       } catch(Exception ex) {
          out.println("<p>Error: " + ex.getMessage() + "</p>");

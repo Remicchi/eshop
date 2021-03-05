@@ -61,7 +61,7 @@ public class EshopOrderServlet extends HttpServlet {
             }
             out.println("<h3>Thank you.<h3>");
          } else { // No book selected
-            out.println("<h3>Please go back and select a gane >:(</h3>");
+            out.println("<h3>Please go back and select a game >:(</h3>");
          }
       } catch(Exception ex) {
          out.println("<p>Error: " + ex.getMessage() + "</p>");
