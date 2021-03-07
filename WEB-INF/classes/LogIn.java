@@ -20,7 +20,7 @@ public class LogIn extends HttpServlet {
       // Print an HTML page as the output of the query
       out.println("<!DOCTYPE html>");
       out.println("<html>");
-      out.println("<head><title>Query Response</title><link rel='stylesheet' href='styles.css' /></head>");
+      out.println("<head><title>Login</title><link rel='stylesheet' href='styles.css' /></head>");
       out.println("<body onload='document.main.submit()' >");
 
       try (
@@ -34,28 +34,26 @@ public class LogIn extends HttpServlet {
          Statement stmt = conn.createStatement();
       ) {
          // Step 3: Execute a SQL SELECT query
-         String sqlStr = "select password from accounts where username = "
+         String sqlStr = "select password from customers where username = "
                + "'" + request.getParameter("username") + "'";   // Single-quote SQL string
 
          ResultSet rset = stmt.executeQuery(sqlStr);  // Send the query to the server
          
          if(rset.next()) {
            if (rset.getString("password").equals(request.getParameter("password"))){
-               out.println("<form method='post' action='main' name='main'></form>");
-         }}
+               out.println("<form method='post' action='main' name='main' username = '" );
+                out.println(request.getParameter("username") );
+                 out.println("'></form>");
+         }} else {
 
-            out.println("<h1> Error! >:( </h1>");
-            out.println("<h2>Yet Another Bookshop</h2>");
-              out.println("<form method='post' action='login'>");
-              out.println(" <b>Enter Username:</b>");
-              out.println(" <input type='text' name='username' />");
-              out.println(" <br /><br />");
-              out.println(" <b>Enter Password:<b>");
-              out.println(" <input type='password' name='password' />");
-               out.println("<br /><br />   ");
-               out.println("<input type='submit' value='Log In'>");
-              out.println(" <input type='reset' value='Clear'>");
-              out.println("</form>");
+out.println("<div id = 'mainTitle'> <div id ='titleText'> <h1 class='centerText'>Yet Another Game Shop</h1> </div> </div> <div id='mainContainer'> ");
+out.println("<div id='error'><h2 class='centerText'>Error!</h2></div>");
+out.println("<div id='error'><h2 class='centerText'>Wrong username or password!</h2></div>");
+
+  out.println("<div id='loginForm'><form method='post' action='login'> <span>Enter Username:</span> <input type='text' name='username' /> <br /><br /> <span>Enter Password:<span> <input type='password' name='password' /> <br /><br /> <input type='submit' value='Log In'> </form> </div>");
+
+}
+
       } catch(Exception ex) {
          out.println("<p>Error: " + ex.getMessage() + "</p>");
          out.println("<p>Check Tomcat console for details.</p>");

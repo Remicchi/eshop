@@ -19,7 +19,7 @@ public class EshopOrderServlet extends HttpServlet {
       // Print an HTML page as the output of the query
       out.println("<!DOCTYPE html>");
       out.println("<html>");
-      out.println("<head><title>Query Response</title></head>");
+      out.println("<head><title>Order Confirmation</title><link rel='stylesheet' href='styles.css' /></head>");
       out.println("<body>");
 
       try (
@@ -32,6 +32,11 @@ public class EshopOrderServlet extends HttpServlet {
          // Step 2: Allocate a 'Statement' object in the Connection
          Statement stmt = conn.createStatement();
       ) {
+
+
+
+         out.println("<div id = 'mainTitle'> <div id ='titleText'> <h1 class='centerText'>Yet Another Game Shop</h1> </div> </div>");
+         out.println("<div id='mainContainer'>");
           // Step 3 & 4: Execute a SQL SELECT query and Process the query result
          // Retrieve the books' id. Can order more than one books.
          String[] ids = request.getParameterValues("id");
@@ -57,12 +62,17 @@ public class EshopOrderServlet extends HttpServlet {
                ResultSet rset = stmt.executeQuery(sqlStr);
                rset.next();
                out.println("<h3>Your order for " + rset.getString("title")
-                     + " has been confirmed.</h3>");
+                     + " has been confirmed.</h3><br />");
             }
             out.println("<h3>Thank you.<h3>");
          } else { // No book selected
-            out.println("<h3>Please go back and select a game >:(</h3>");
+            out.println("<h3>No game selected. >:(</h3>");
          }
+
+
+
+         out.println("</div>");
+
       } catch(Exception ex) {
          out.println("<p>Error: " + ex.getMessage() + "</p>");
          out.println("<p>Check Tomcat console for details.</p>");
@@ -71,5 +81,9 @@ public class EshopOrderServlet extends HttpServlet {
  
       out.println("</body></html>");
       out.close();
+   }
+   public void doPost (HttpServletRequest request, HttpServletResponse response)
+                   throws ServletException, IOException {
+   doGet(request, response);  // Re-direct POST request to doGet()
    }
 }
