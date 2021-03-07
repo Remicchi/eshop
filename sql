@@ -7,10 +7,7 @@ orders
 id gameid customerid quantity
 
 customers
-id name email
-
-accounts
-id username password hpnumber address
+id name email address username password 
 
 DROP TABLE IF EXISTS accounts;
 CREATE TABLE accounts (
@@ -63,14 +60,17 @@ CREATE TABLE customers (
 id int NOT NULL AUTO_INCREMENT,
 name varchar(50),
 email varchar(50),
+address varchar(50),
+username varchar(50),
+password varchar(50),
 PRIMARY KEY (id)
 );
 
-INSERT INTO customers values(1 , 'Bob' , 'bob@gmail.com');
-INSERT INTO customers values(2 , 'Cat' , 'cat@gmail.com');
-INSERT INTO customers values(3 , 'Dog' , 'dog@gmail.com');
-INSERT INTO customers values(4 , 'Emily' , 'Emily@gmail.com');
-INSERT INTO customers values(5 , 'A Person' , 'Person@gmail.com');
+INSERT INTO customers values(1 , 'Bob' , 'bob@gmail.com' , 'Addres Road' , 'bob123' , '123456');
+INSERT INTO customers values(2 , 'Cat' , 'cat@gmail.com' , 'Addres Road' , 'cat' , 'ilikecats');
+INSERT INTO customers values(3 , 'Dog' , 'dog@gmail.com' , 'Addres Road' , 'dog' , 'ilikedogs');
+INSERT INTO customers values(4 , 'Emily' , 'Emily@gmail.com' , 'Addres Road' , 'Emily' , 'password');
+INSERT INTO customers values(5 , 'A Person' , 'Person@gmail.com' , 'Addres Road' , 'aperso' , 'apassword');
 
 SELECT * FROM games;
 SELECT * FROM orders;

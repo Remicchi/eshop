@@ -36,32 +36,81 @@ public class Main extends HttpServlet {
 
 
 
-         out.println("<h2>game store baby</h2>");
+         out.println("<div id = 'mainTitle'> <div id ='titleText'> <h1 class='centerText'>Yet Another Game Shop</h1> </div> </div>");
 
 
          ResultSet rset = stmt.executeQuery(sqlStr);  // Send the query to the server
 
 
+
+
+
+
+out.println("<div id='mainContainer'>");
 		out.println("<form method='post' action='query'>");
-		out.println("Choose an developer:");
+
+      out.println("<div id='searchGrid'>");
+
+		out.println("<div id='developer' class='centerText'><h2>Select developer:</h2></div>");
+
+      out.println("<div id='genre' class='centerText'><h2>Select genre:</h2></div>");
 
 
 
-
+out.println("<div id='developers'>");
          int count = 0;
          while(rset.next()) {
             // Print a paragraph <p>...</p> for each record
-            out.println("<input type='checkbox' name='developer' value='" + rset.getString("developer") + "' />" + rset.getString("developer"));
+            out.println("<br /><input class = 'searchOption' type='checkbox' name='developer' value='" + rset.getString("developer") + "' />" + rset.getString("developer"));
             count++;
          }
-         out.println("<input type='submit' value='Search' />");
+   out.println("</div>");
+
+
+out.println("<input type='submit' value='Search' id ='searchnoi' />");
+out.println("</form>");
+
+
+
+sqlStr = "SELECT DISTINCT genre FROM games";
+rset = stmt.executeQuery(sqlStr);
+
+out.println("<div id='genres'>");
+         count = 0;
+         while(rset.next()) {
+            // Print a paragraph <p>...</p> for each recordgenre
+            out.println("<br /><input class = 'searchOption' type='checkbox' name='genre' value='" + rset.getString("genre") + "' />" + rset.getString("genre"));
+            count++;
+         }
+   out.println("</div>");
+
+
+out.println("</div>");//grid
+
+    
+
+
 		out.println("</form>");
 		
 
-    	out.println("<form method='post' action='query'>");
-		out.println("<input type='text' name='developer' />");
-    	out.println("<input type='submit' value='Search' />");
+
+
+
+
+
+
+
+out.println("<h2>Search:</h2>");
+      out.println("<form method='post' action='queryText'>");
+      out.println("<input type='text' name='text' />");
+      out.println("<input type='submit' value='Search' />");
+
     	out.println("</form>");
+
+
+
+
+      out.println("</div>"); //maincontainer
 
       } catch(Exception ex) {
          out.println("<p>Error: " + ex.getMessage() + "</p>");

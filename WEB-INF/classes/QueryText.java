@@ -5,8 +5,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet("/query")   // Configure the request URL for this servlet (Tomcat 7/Servlet 3.0 upwards)
-public class QueryServlet extends HttpServlet {
+@WebServlet("/queryText")   // Configure the request URL for this servlet (Tomcat 7/Servlet 3.0 upwards)
+public class QueryText extends HttpServlet {
 
    // The doGet() runs once per HTTP GET request to this servlet.
    @Override
@@ -34,35 +34,40 @@ public class QueryServlet extends HttpServlet {
          // Step 3: Execute a SQL SELECT query
         
 
-         String[] developers = request.getParameterValues("developer");  // Returns an array of Strings
-String[] genres = request.getParameterValues("genre");
-String[] title = request.getParameterValues("title");
+
+String[] text = request.getParameterValues("text");
 
 
-if (developers != null || genres != null) {
+if (text != null) {
 
          String sqlStr = "SELECT * FROM games WHERE ";
-         if (developers != null) {
+         if (text != null) {
             sqlStr += "developer IN (";
-           for (int i = 0; i < developers.length; ++i) {
-              if (i < developers.length - 1) {
-                 sqlStr += "'" + developers[i] + "', ";  // need a commas
+           for (int i = 0; i < text.length; ++i) {
+              if (i < text.length - 1) {
+                 sqlStr += "'" + text[i] + "', ";  // need a commas
               } else {
-                 sqlStr += "'" + developers[i] + "'";    // no commas
+                 sqlStr += "'" + text[i] + "'";    // no commas
               }
            }
            sqlStr += ")";
-         }
-         if (genres != null) {
-          if (developers != null) {
-            sqlStr += " AND ";
-          }
+            sqlStr += " OR ";
           sqlStr += " genre in (";
-           for (int i = 0; i < genres.length; ++i) {
-              if (i < genres.length - 1) {
-                 sqlStr += "'" + genres[i] + "', ";  // need a commas
+           for (int i = 0; i < text.length; ++i) {
+              if (i < text.length - 1) {
+                 sqlStr += "'" + text[i] + "', ";  // need a commas
               } else {
-                 sqlStr += "'" + genres[i] + "'";    // no commas
+                 sqlStr += "'" + text[i] + "'";    // no commas
+              }
+           }
+           sqlStr+= ") ";
+           sqlStr += " OR ";
+          sqlStr += " title in (";
+           for (int i = 0; i < text.length; ++i) {
+              if (i < text.length - 1) {
+                 sqlStr += "'" + text[i] + "', ";  // need a commas
+              } else {
+                 sqlStr += "'" + text[i] + "'";    // no commas
               }
            }
            sqlStr+= ") ";
