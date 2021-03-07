@@ -44,17 +44,22 @@ public class LogIn extends HttpServlet {
                out.println("<form method='post' action='main' name='main'>" );
                 out.println("<input type='hidden' name='username' value = '" + request.getParameter("username") + "' />");
                  out.println("</form>");
-         }} else {
+         }
+
+      } 
 
 out.println("<div id = 'mainTitle'> <div id ='titleText'> <h1 class='centerText'>Yet Another Game Shop</h1> </div> </div> <div id='mainContainer'> ");
-out.println("<div id='error'><h2 class='centerText'>Error!</h2></div>");
-out.println("<div id='error'><h2 class='centerText'>Wrong username or password!</h2></div>");
+
+
+if (request.getParameter("account") == null) {
+   out.println("<div id='error'><h2 class='centerText'>Error!</h2></div>");
+   out.println("<div id='error'><h2 class='centerText'>Wrong username or password!</h2></div>");
+}
 
   out.println("<div id='loginForm'><form method='post' action='login'> <span>Enter Username:</span> <input type='text' name='username' value = '");
 out.println(request.getParameter("username"));
    out.println("' /> <br /><br /> <span>Enter Password:<span> <input type='password' name='password' /> <br /><br /> <input type='submit' value='Log In'> </form><div id='account'> <form method='post' action='account' ><input type='submit' value='Create Account'></form></div></div>");
 out.println("");
-}
 
       } catch(Exception ex) {
          out.println("<p>Error: " + ex.getMessage() + "</p>");

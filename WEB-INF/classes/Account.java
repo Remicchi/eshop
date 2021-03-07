@@ -48,14 +48,36 @@ public class Account extends HttpServlet {
 
 out.println("<div id = 'mainTitle'> <div id ='titleText'> <h1 class='centerText'>Yet Another Game Shop</h1> </div> </div> <div id='mainContainer'> ");
 out.println("<div><h2 class='centerText'>Create Account</h2></div>");
+
+if (request.getParameter("username") != null && request.getParameter("password") != null && 
+   request.getParameter("email") != null && request.getParameter("address") != null && 
+   request.getParameter("address").length() <= 50 && request.getParameter("email").length() <= 50 &&
+   request.getParameter("username").length() <= 50) {
+
+   out.println("ye boii");
+   
+   String sqlStr = "INSERT INTO customers (username , password , name , email , address) VALUES("
+   + "'" + request.getParameter("username") + "'" + ","
+   + "'" + request.getParameter("password") + "'" + ","
+   + "'" + request.getParameter("name") + "'" + ","
+   + "'" + request.getParameter("email") + "'" + ","
+   + "'" + request.getParameter("address") + "'" + ")";
+
+int count = stmt.executeUpdate(sqlStr);
+out.println("<form method='post' action='login' name='main'>" );
+                out.println("<input type='hidden' name='username' value = '" + request.getParameter("username") + "' />");
+                out.println("<input type='hidden' name='account' value = 'hehe' />");
+                 out.println("</form>");
+}
+
 //out.println("<div id='error'><h2 class='centerText'>Wrong username or password!</h2></div>");
 
-  out.println("<div id='loginForm'><form method='post' action='account'> <span>Enter Username:</span> <input type='text' name='username' value = '");
+  out.println("<div id='loginForm'><form method='post' action='account'> <span>Enter Username:</span> <input type='text' name='username'");
    out.println(request.getParameter("username"));
    out.println("' /> <br /><br /> <span>Enter Password:<span> <input type='password' name='password' /> ");
    out.println("<br /><br /> <span>Enter Name:<span> <input type='text' name='name' /> ");
-   out.println("<br /><br /> <span>Enter Name:<span> <input type='text' name='email' /> ");
-      out.println("<br /><br /> <span>Enter Name:<span> <input type='text' name='address' /> ");
+   out.println("<br /><br /> <span>Enter Email:<span> <input type='text' name='email' /> ");
+      out.println("<br /><br /> <span>Enter Address:<span> <input type='text' name='address' /> ");
      out.println(" <br /><br /> <input type='submit' value='Create Account'> </form> </div>");
 
 //}
