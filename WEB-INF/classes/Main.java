@@ -66,7 +66,7 @@ out.println("<div id='developers'>");
          }
    out.println("</div>");
 
-
+out.println("<input type='hidden' name='username' value = '" + request.getParameter("username") + "' />");
 out.println("<input type='submit' value='Search' id ='searchnoi' />");
 out.println("</form>");
 
@@ -92,23 +92,15 @@ out.println("</div>");//grid
 
 		out.println("</form>");
 		
-
-
-
-
-
-
-
-
 out.println("<h2>Search:</h2>");
       out.println("<form method='post' action='queryText'>");
       out.println("<input type='text' name='text' />");
       out.println("<input type='submit' value='Search' />");
-
+   out.println("<input type='hidden' name='username' value = '" + request.getParameter("username") + "' />");
     	out.println("</form>");
 
 
-
+   out.println("<div id='loggedin'>Logged in as " +  request.getParameter("username") + "</div>");
 
       out.println("</div>"); //maincontainer
 

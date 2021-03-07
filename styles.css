@@ -41,7 +41,9 @@ h3{
 	max-width: 980px;
 	border: 1px black solid;
 	padding:10px;
+	position: relative;
 }
+
 
 .centerText{
 	text-align: center;
@@ -109,4 +111,14 @@ h3{
 	border: 1px black solid;
 	margin-bottom: 10px;
 	margin-top: 10px;
+}
+
+#loggedin{
+	position:absolute;
+    bottom:10;
+    right:10;
+}
+
+.details{
+	color: red;
 }

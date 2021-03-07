@@ -41,9 +41,9 @@ public class LogIn extends HttpServlet {
          
          if(rset.next()) {
            if (rset.getString("password").equals(request.getParameter("password"))){
-               out.println("<form method='post' action='main' name='main' username = '" );
-                out.println(request.getParameter("username") );
-                 out.println("'></form>");
+               out.println("<form method='post' action='main' name='main'>" );
+                out.println("<input type='hidden' name='username' value = '" + request.getParameter("username") + "' />");
+                 out.println("</form>");
          }} else {
 
 out.println("<div id = 'mainTitle'> <div id ='titleText'> <h1 class='centerText'>Yet Another Game Shop</h1> </div> </div> <div id='mainContainer'> ");
