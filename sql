@@ -9,20 +9,6 @@ id gameid customerid quantity
 customers
 id name email address username password 
 
-DROP TABLE IF EXISTS accounts;
-CREATE TABLE accounts (
-id int NOT NULL AUTO_INCREMENT,
-username varchar(50),
-password varchar(50),
-hpnumber int,
-address varchar(50),
-PRIMARY KEY (id)
-);
-
-insert into accounts values (1, 'admin', 'ballsdeep69', 99126929, 'UpYourAssTurnRight Ave');
-insert into accounts values (2, 'aa', 'aa', 89989898, 'hehe land');
-insert into accounts values (3, 'username', 'password', 97351895, 'Another Road');
-
 DROP TABLE IF EXISTS games;
 CREATE TABLE games (
 id int NOT NULL AUTO_INCREMENT,
@@ -49,12 +35,6 @@ qtyordered int,
 PRIMARY KEY (id)
 );
 
-INSERT INTO orders values(1 , 2 , 2 , 1);
-INSERT INTO orders values(2 , 1 , 2 , 2);
-INSERT INTO orders values(3 , 1 , 2 , 3);
-INSERT INTO orders values(4 , 3 , 3 , 1);
-INSERT INTO orders values(5 , 2 , 1 , 22);
-
 DROP TABLE IF EXISTS customers;
 CREATE TABLE customers (
 id int NOT NULL AUTO_INCREMENT,
@@ -66,13 +46,19 @@ password varchar(50),
 PRIMARY KEY (id)
 );
 
-INSERT INTO customers values(1 , 'Bob' , 'bob@gmail.com' , 'Addres Road' , 'bob123' , '123456');
-INSERT INTO customers values(2 , 'Cat' , 'cat@gmail.com' , 'Addres Road' , 'cat' , 'ilikecats');
-INSERT INTO customers values(3 , 'Dog' , 'dog@gmail.com' , 'Addres Road' , 'dog' , 'ilikedogs');
-INSERT INTO customers values(4 , 'Emily' , 'Emily@gmail.com' , 'Addres Road' , 'Emily' , 'password');
-INSERT INTO customers values(5 , 'A Person' , 'Person@gmail.com' , 'Addres Road' , 'aperso' , 'apassword');
+INSERT INTO customers values(1 , 'Bob' , 'bob@gmail.com' , "Bob's House" , 'bob123' , '123456');
+INSERT INTO customers values(2 , 'Cat' , 'cat@gmail.com' , 'Cat Country' , 'cat' , 'ilikecats');
+INSERT INTO customers values(3 , 'Dog' , 'dog@gmail.com' , 'Dog Land' , 'dog' , 'ilikedogs');
+INSERT INTO customers values(4 , 'Emily' , 'Emily@gmail.com' , 'Emily Road' , 'Emily' , 'password');
+INSERT INTO customers values(5 , 'A Person' , 'Person@gmail.com' , 'Address Road' , 'aperso' , 'apassword');
+INSERT INTO customers values(6 , 'a' , 'a@a.com' , 'address a' , 'a' , 'a');
+
+CREATE VIEW ViewOrders AS 
+SELECT orders.id , customers.name as customer_name , games.title as game_title, orders.qtyordered 
+FROM orders 
+JOIN customers ON orders.customerid = customers.id
+JOIN games ON orders.gameid = games.id;
 
 SELECT * FROM games;
 SELECT * FROM orders;
 SELECT * FROM customers;
-SELECT * FROM accounts;

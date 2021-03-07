@@ -43,7 +43,12 @@ public class EshopOrderServlet extends HttpServlet {
          if (ids != null) {
             String sqlStr;
             int count;
- 
+            sqlStr = "SELECT id FROM customers WHERE username = '" + request.getParameter("username") + "'";
+            ResultSet rset = stmt.executeQuery(sqlStr);
+            int customerID = 0;
+            if(rset.next()) {
+                      customerID = rset.getInt("id");
+                   }
             // Process each of the books
             for (int i = 0; i < ids.length; ++i) {
                // Update the qty of the table books
@@ -53,19 +58,19 @@ public class EshopOrderServlet extends HttpServlet {
                //out.println("<p>" + count + " record updated.</p>");
  
                // Create a transaction record
-               sqlStr = "INSERT INTO orders (gameid, qtyordered) VALUES ("
-                     + ids[i] + ", 1)";
+               sqlStr = "INSERT INTO orders (gameid, customerid , qtyordered) VALUES ("
+                     + ids[i] + " , " + customerID + " , 1)";
                //out.println("<p>" + sqlStr + "</p>");  // for debugging
                count = stmt.executeUpdate(sqlStr);
                //out.println("<p>" + count + " record inserted.</p>");
                sqlStr = "SELECT title FROM games WHERE id = " + ids[i];
-               ResultSet rset = stmt.executeQuery(sqlStr);
+               rset = stmt.executeQuery(sqlStr);
                rset.next();
                out.println("<h3>Your order for " + rset.getString("title")
                      + " has been confirmed.</h3>");
             }
       sqlStr = "select * from customers where username = '" + request.getParameter("username") + "'";
-        ResultSet rset = stmt.executeQuery(sqlStr);
+         rset = stmt.executeQuery(sqlStr);
           while(rset.next()) {
                       // Print a paragraph <p>...</p> for each record
                       out.println("<br />Name: <span class='details'>" + rset.getString("name") + "</span>" );
