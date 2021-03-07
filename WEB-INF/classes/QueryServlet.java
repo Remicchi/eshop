@@ -38,6 +38,10 @@ public class QueryServlet extends HttpServlet {
 String[] genres = request.getParameterValues("genre");
 String[] title = request.getParameterValues("title");
 
+out.println("<div id = 'mainTitle'> <div id ='titleText'> <h1 class='centerText'>Yet Another Game Shop</h1> </div> </div>");
+
+
+out.println("<div id='mainContainer'>");
 
 if (developers != null || genres != null) {
 
@@ -71,10 +75,7 @@ if (developers != null || genres != null) {
 
 
 
-out.println("<div id = 'mainTitle'> <div id ='titleText'> <h1 class='centerText'>Yet Another Game Shop</h1> </div> </div>");
 
-
-out.println("<div id='mainContainer'>");
 
          out.println("<h3>Query:</h3>");
          out.println("<div id= 'sqlstatement'> <p>" + sqlStr + "</p> </div>"); // Echo for debugging
@@ -142,18 +143,37 @@ out.println("<div id='mainContainer'>");
          
         //out.println("</tbody>");
         out.println("</table>");
+
+       out.println("<input type='hidden' name='username' value = '" + request.getParameter("username") + "' />");
+
+
+
+         sqlStr = "select * from customers where username = '" + request.getParameter("username") + "'";
+         rset = stmt.executeQuery(sqlStr);
+          while(rset.next()) {
+                      // Print a paragraph <p>...</p> for each record
+                      out.println("<br />Name: <span class='details'>" + rset.getString("name") + "</span>" );
+                      out.println("<br />Email: <span class='details'>" + rset.getString("email") + "</span>" );
+                      out.println("<br />Address: <span class='details'>" + rset.getString("address") + "</span>" );
+                      count++;
+                   }
+
+
+
+
+     out.println("<br />");
+       out.println("<br />");
+       out.println("<p><input type='submit' value='ORDER' />");
+        out.println("</form>");
+   out.println("<div id='loggedin'>Logged in as " +  request.getParameter("username") + "</div>");
       } else {
+
         out.println("<h2>No search options selected.</h2>");
       }
 
 
 
-        out.println("<p>Enter your Name: <input type='text' name='cust_name' /></p>");
-        out.println("<p>Enter your Email: <input type='text' name='cust_email' /></p>");
-        out.println("<p>Enter your Phone Number: <input type='text' id='cust_phone' /></p>");
-       
-       out.println("<p><input type='submit' value='ORDER' />");
-        out.println("</form>");
+
 
 out.println("</div>");
 

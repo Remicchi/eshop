@@ -62,9 +62,18 @@ public class EshopOrderServlet extends HttpServlet {
                ResultSet rset = stmt.executeQuery(sqlStr);
                rset.next();
                out.println("<h3>Your order for " + rset.getString("title")
-                     + " has been confirmed.</h3><br />");
+                     + " has been confirmed.</h3>");
             }
-            out.println("<h3>Thank you.<h3>");
+      sqlStr = "select * from customers where username = '" + request.getParameter("username") + "'";
+        ResultSet rset = stmt.executeQuery(sqlStr);
+          while(rset.next()) {
+                      // Print a paragraph <p>...</p> for each record
+                      out.println("<br />Name: <span class='details'>" + rset.getString("name") + "</span>" );
+                      out.println("<br />Email: <span class='details'>" + rset.getString("email") + "</span>" );
+                      out.println("<br />Address: <span class='details'>" + rset.getString("address") + "</span>" );
+                   }
+
+            out.println("<br /><br /><h3>Thank you.<h3>");
          } else { // No book selected
             out.println("<h3>No game selected. >:(</h3>");
          }
