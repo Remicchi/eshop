@@ -13,7 +13,7 @@ accounts
 id username password hpnumber address
 
 DROP TABLE IF EXISTS accounts;
-CREATE TABLE (
+CREATE TABLE accounts (
 id int NOT NULL AUTO_INCREMENT,
 username varchar(50),
 password varchar(50),
@@ -22,7 +22,9 @@ address varchar(50),
 PRIMARY KEY (id)
 );
 
-insert into games values (1, 'admin', 'ballsdeep69', 99126929, 'UpYourAssTurnRight Ave');
+insert into accounts values (1, 'admin', 'ballsdeep69', 99126929, 'UpYourAssTurnRight Ave');
+insert into accounts values (2, 'aa', 'aa', 89989898, 'hehe land');
+insert into accounts values (3, 'username', 'password', 97351895, 'Another Road');
 
 DROP TABLE IF EXISTS games;
 CREATE TABLE games (
@@ -73,3 +75,4 @@ INSERT INTO customers values(5 , 'A Person' , 'Person@gmail.com');
 SELECT * FROM games;
 SELECT * FROM orders;
 SELECT * FROM customers;
+SELECT * FROM accounts;
